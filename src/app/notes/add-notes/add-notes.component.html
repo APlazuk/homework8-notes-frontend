@@ -1,0 +1,71 @@
+<ng-template #contentAddNote let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Note</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="noteForm" (ngSubmit)="addNote()">
+      <div class="form-group">
+        <label for="title">Title: </label>
+        <div class="input-group">
+          <input id="title" type="text" formControlName="title">
+        </div>
+        <div
+          *ngIf="addFormControl['title'].invalid && (addFormControl['title'].touched || addFormControl['title'].dirty)">
+        <span class="text-danger" *ngIf="(addFormControl['title'].errors?.['required'])">
+          Title is required
+        </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content: </label>
+        <div class="input-group">
+          <input id="content" type="text" formControlName="content">
+        </div>
+        <div
+          *ngIf="addFormControl['content'].invalid && (addFormControl['content'].dirty || addFormControl['content'].touched)">
+        <span class="text-danger" *ngIf="(addFormControl['content'].errors?.['required'])">
+          Content is required
+        </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author: </label>
+        <div class="input-group">
+          <input id="author" type="text" formControlName="author">
+        </div>
+        <div
+          *ngIf="addFormControl['author'].invalid && (addFormControl['author'].dirty || addFormControl['author'].touched)">
+        <span class="text-danger" *ngIf="(addFormControl['author'].errors?.['required'])">
+          Author is required
+        </span>
+        </div>
+      </div>
+
+      <div>
+        <p>Complete the form to enable button.</p>
+        <div class="border text-center">
+          <button id="save-btn" data-dismiss="modal" class="btn btn-info m-1" type="submit"
+                  [disabled]="!noteForm.valid">Save Note
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancel</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-primary my-2" (click)="openAdd(contentAddNote)">
+  <i class="fa fa-edit"></i>Add Note
+</button>
+
+
+
+

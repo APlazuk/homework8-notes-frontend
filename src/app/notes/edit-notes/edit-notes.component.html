@@ -1,0 +1,67 @@
+<ng-template #contentEditNote let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Note</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm" (ngSubmit)="editNote()">
+
+      <div class="form-group">
+        <label for="title">Title: </label>
+        <div class="input-group">
+          <input id="title" type="text" formControlName="title">
+        </div>
+        <div *ngIf="editFormControl['title'].invalid && (editFormControl['title'].touched || editFormControl['title'].dirty)">
+        <span class="text-danger" *ngIf="(editFormControl['title'].errors?.['required'])">
+          Title is required
+        </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content: </label>
+        <div class="input-group">
+          <input id="content" type="text" formControlName="content">
+        </div>
+        <div *ngIf="editFormControl['content'].invalid && (editFormControl['content'].dirty || editFormControl['content'].touched)">
+        <span class="text-danger" *ngIf="(editFormControl['content'].errors?.['required'])">
+          Content is required
+        </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author: </label>
+        <div class="input-group">
+          <input id="author" type="text" formControlName="author">
+        </div>
+        <div *ngIf="editFormControl['author'].invalid && (editFormControl['author'].dirty || editFormControl['author'].touched)">
+        <span class="text-danger" *ngIf="(editFormControl['author'].errors?.['required'])">
+          Author is required
+        </span>
+        </div>
+      </div>
+
+      <div>
+        <p>Complete the form to enable button.</p>
+        <div class="border text-center">
+          <button id="save-btn" data-dismiss="modal" class="btn btn-info m-1" type="submit"
+                  [disabled]="!editForm.valid">Save Note
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Cancel</button>
+  </div>
+</ng-template>
+
+
+<button class="btn btn-sm btn-outline-secondary" (click)="openEdit(contentEditNote)">
+  <i class="fa fa-edit"></i>Edit
+</button>
+

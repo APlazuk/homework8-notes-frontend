@@ -1,0 +1,24 @@
+<div class="container">
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+    </div>
+  </section>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div *ngFor="let note of notes" class="col">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ note.title }}</h5>
+          <p class="card-text">{{ note.content }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <app-edit-notes [noteEdit]="note"></app-edit-notes>
+            </div>
+            <small class="text-body-secondary">{{ note.creationDate }}</small>
+            <small class="text-body-secondary">{{ note.author }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
